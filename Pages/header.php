@@ -24,7 +24,7 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
                     <a href="builder.php">PC Builder</a>
                 </li>
                 <li>
-                    <a href="">Products</a>
+                    <a href="">About</a>
                 </li>
                 <li>
                     <a href="">Support</a>
