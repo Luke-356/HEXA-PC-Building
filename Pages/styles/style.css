@@ -624,7 +624,7 @@ a {
 
 .builder-body {
   width: 90%;
-  margin: 2.8rem auto 0rem auto;
+  margin: 4rem auto 0rem auto;
 }
 
 .builder-body h1 {
@@ -669,8 +669,7 @@ a {
   color: #313131;
 }
 
-.builder-contents div button {
-  border: none;
+.builder-contents div a {
   cursor: pointer;
   background-color: #e3e3e3;
   padding: 1rem 1.6rem;
@@ -684,7 +683,7 @@ a {
           align-items: center;
 }
 
-.builder-contents div button:hover {
+.builder-contents div a:hover {
   background-color: #dadada;
 }
 
@@ -698,8 +697,59 @@ a {
   display: flex;
 }
 
-.check-out {
+.check-out-div {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 1.5rem 1.8rem;
+  margin-top: 1.5rem;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.check-out-div .check-out {
   background: none;
+}
+
+.check-out-div div {
+  background-color: #f2f2f2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 17px;
+}
+
+.check-out-div p {
+  font-size: 19px;
+}
+
+.check-out-div .check-out {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.check-out-div .check-out button {
+  border: none;
+  background-color: #17a977;
+  padding: 1.5rem 2rem;
+  border-radius: 17px;
+  color: white;
+  cursor: pointer;
+  font-size: 19px;
+}
+
+.check-out-div .check-out button:hover {
+  background-color: #159268;
 }
 
 .free-ship p {
@@ -722,6 +772,20 @@ a {
 .view-product-container h2 {
   color: #0080ff;
   font-size: 2rem;
+}
+
+.view-product-container button {
+  background-color: #17a977;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.view-product-container button:hover {
+  background-color: #159268;
 }
 
 .view-table {
