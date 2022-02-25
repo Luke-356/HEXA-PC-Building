@@ -1,5 +1,12 @@
 <?php
+session_start();
 $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
+if (isset($_POST['btn-add'])) {
+    if (isset($_SESSION["add_product"])) {
+    } else {
+        $product_array = array();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +15,10 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css?v=1.6">
+    <link rel="stylesheet" href="./styles/style.css?v=2.9">
     <title>Add CPU</title>
     <style>
-        td img {
+        .view-product-wrap img {
             width: 100px;
         }
     </style>
@@ -23,63 +30,48 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
         include 'header.php';
         ?>
 
-        <?php
-        $select = "SELECT * FROM product WHERE ProductType='CPU' ORDER BY ProductID Desc";
-        $run = mysqli_query($connect, $select);
-        $count = mysqli_num_rows($run);
+        <div class='view-product-container'>
+            <?php
+            $select = "SELECT * FROM product WHERE ProductType='CPU' ORDER BY ProductID Desc";
+            $run = mysqli_query($connect, $select);
+            $count = mysqli_num_rows($run);
 
-        echo "<div class='view-product-container'>";
-        if ($count > 0) {
-            echo "<h2>Choose CPU</h2>";
-            while ($data = mysqli_fetch_array($run)) {
-                echo "<form method='POST'>";
-                echo "<table class='view-table'>";
-                echo "<tr>";
-                echo "<th>";
-                echo "Image";
-                echo "</th>";
-                echo "<th>";
-                echo "ProductName";
-                echo "</th>";
-                echo "<th>";
-                echo "CoreCount";
-                echo "</th>";
-                echo "<th>";
-                echo "CoreClock";
-                echo "</th>";
-                echo "<th>";
-                echo "BoostClock";
-                echo "</th>";
-                echo "<th>";
-                echo "TDP";
-                echo "</th>";
-                echo "<th>";
-                echo "Price";
-                echo "</th>";
-                echo "</tr>";
+            if ($count > 0) {
+            ?>
+                <h2>Choose CPU</h2>
+                <form method='POST' action="addCPU.php?id=''">
+                    <div class="view-product-grid">
+                        <?php
+                        while ($data = mysqli_fetch_array($run)) {
+                        ?>
 
-                echo "<tr>";
-                echo "<td>";
-                echo "<img src='../Admin/ProductImages/" . $data['Image'] . "' >";
-                echo "</td>";
-                echo "<td>" . $data['ProductName'] . "</td>";
-                echo "<td>" . $data['CoreCount'] . "</td>";
-                echo "<td>" . $data['CoreClock'] . "</td>";
-                echo "<td>" . $data['BoostClock'] . "</td>";
-                echo "<td>" . $data['TDB'] . "</td>";
-                echo "<td>$ " . $data['Price'] . "</td>";
-                echo "<td>";
-                echo "<button>";
-                echo "Add";
-                echo "</button>";
-                echo "</td>";
-                echo "</tr>";
-                echo "</table>";
-                echo "</form>";
-            }
-        }
-        echo "</div>";
-        ?>
+                            <div class='view-product-wrap'>
+                                <img src='../Admin/ProductImages/<?php echo $data['Image'] ?>'>
+                                <p><?php echo $data['ProductName'] ?></p>
+                                <!-- <td><?php echo $data['CoreCount'] ?></td>
+                            <td><?php echo $data['CoreClock'] ?> GHz</td>
+                            <td><?php echo $data['BoostClock'] ?> GHz</td>
+                            <td><?php echo $data['TDB'] ?> W</td> -->
+                                <p>$<?php echo $data['Price'] ?></p>
+                                <input type="hidden" name="hidden-name" value="<?php echo $data['ProductName'] ?>">
+                                <input type="hidden" name="hidden-price" value="<?php echo $data['Price'] ?>">
+                                <div class="btn-flex">
+                                    <button type="submit" name="btn-add" class="add-btn">Add</button>
+                                    <button>Detail</button>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    } else {
+                        echo "<script>
+                        alert('There are no products!');
+                        window.location.assign('builder.php');
+                    </script>";
+                    }
+                    ?>
+                    </div>
+                </form>
+        </div>
     </div>
 </body>
 

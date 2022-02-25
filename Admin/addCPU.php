@@ -132,7 +132,7 @@ if (isset($_POST['cpuSubmit'])) {
 
                     <div class="addProDiv">
                         <label for="Price">Price</label>
-                        <input type="number" name="txtPrice" id="Price" placeholder="Dollar" step="0.01" required>
+                        <input type="number" name="txtPrice" id="Price" placeholder="Dollar" step="0000.01" required>
                     </div>
 
                     <div class="addProDiv">

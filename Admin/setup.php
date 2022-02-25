@@ -17,13 +17,13 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
 //     mysqli_error($connect);
 // }
 
-// $dropProduct = "Drop Table Product";
-// $runDrop = mysqli_query($connect, $dropProduct);
-// if ($runDrop) {
-//     echo "Product Table Dropped <br>";
-// } else {
-//     mysqli_error($connect);
-// }
+$dropProduct = "Drop Table Product";
+$runDrop = mysqli_query($connect, $dropProduct);
+if ($runDrop) {
+    echo "Product Table Dropped <br>";
+} else {
+    mysqli_error($connect);
+}
 
 //create tables
 $createUser = "CREATE TABLE User

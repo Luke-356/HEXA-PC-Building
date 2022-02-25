@@ -73,6 +73,11 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
                 echo "</table>";
                 echo "</form>";
             }
+        } else {
+            echo "<script>
+            alert('There are no products!');
+            window.location.assign('builder.php');
+        </script>";
         }
         echo "</div>";
         ?>
