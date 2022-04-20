@@ -2,12 +2,11 @@
 $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
 include 'adminCheck.php';
 
-if (isset($_POST['gpuSubmit'])) {
+if (isset($_POST['cpuSubmit'])) {
     $name = $_POST['txtName'];
-    $memory = $_POST['txtMemory'];
-    $clock = $_POST['txtCoreC'];
-    $boost = $_POST['txtBoostC'];
-    $tdb = $_POST['txtTDB'];
+    $rpm = $_POST['txtRPM'];
+    $noice = $_POST['txtNoice'];
+    $color = $_POST['txtColor'];
     $price = $_POST['txtPrice'];
 
     $target_dir = "ProductImages/";
@@ -44,17 +43,16 @@ if (isset($_POST['gpuSubmit'])) {
     }
 
     if ($uploadOk == 0) {
-        echo "Sorry, your image was not uploaded. Please Try Again.";
+        echo " Sorry, your image was not uploaded. Please Try Again.";
     } else {
         if (move_uploaded_file($_FILES["txtImage"]["tmp_name"], $target_file)) {
             // if everything is ok, try to upload file
-
-            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Memory`, `CoreClock`, `BoostClock`, `TDP`, `Price`, `Image`) 
-            VALUES (NULL,'GPU','$name','$memory','$clock','$boost','$tdb','$price','$fileName')";
+            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `FanRPM`, `NoiceLevel`, `Color`, `Price`, `Image`) 
+            VALUES (NULL,'CPU Cooler','$name','$rpm','$noice','$color','$price','$fileName')";
             $run = mysqli_query($connect, $insert);
 
             if ($run) {
-                echo "<script>alert('Add Product Successful')</script>";
+                echo "<script>alert('CPU Cooler Added Successfully')</script>";
             }
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -83,7 +81,7 @@ if (isset($_POST['gpuSubmit'])) {
             text-align: center;
         }
     </style>
-    <title>Document</title>
+    <title>Admin</title>
 </head>
 
 <body>
@@ -95,35 +93,30 @@ if (isset($_POST['gpuSubmit'])) {
         <div class="admin-content">
             <div class="add-product-wrap">
                 <div class="header-back-btn">
-                    <h2>Add GPU</h2>
+                    <h2>Add CPU Cooler</h2>
                     <a href="productRedirect.php">Back</a>
                 </div>
 
-                <form method="post" class="product-form" enctype="multipart/form-data">
-                    <div class="gpu-input">
+                <form method="POST" class="product-form" enctype="multipart/form-data">
+                    <div class="cpu-input">
                         <div class="addProDiv">
-                            <label for="Name">GPU Name</label>
+                            <label for="Name">Cooler Name</label>
                             <input type="text" name="txtName" id="Name" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="Memory">Memory</label>
-                            <input type="number" name="txtMemory" id="Memory" placeholder="GB" required>
+                            <label for="RMP">Fan RPM</label>
+                            <input type="number" name="txtRPM" id="RPM" placeholder="RPM" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="CoreC">Core Clock</label>
-                            <input type="number" name="txtCoreC" id="CoreC" placeholder="MHz" required>
+                            <label for="Noice">Noice Level</label>
+                            <input type="number" name="txtNoice" id="Noice" placeholder="dB" step="0.01" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="BoostC">Boost Clock</label>
-                            <input type="number" name="txtBoostC" id="BoostC" placeholder="MHz" required>
-                        </div>
-
-                        <div class="addProDiv">
-                            <label for="TDP">TDP</label>
-                            <input type="number" name="txtTDB" id="TDB" placeholder="Watt" required>
+                            <label for="Color">Color</label>
+                            <input type="text" name="txtColor" id="Color" required>
                         </div>
 
                         <div class="addProDiv">
@@ -133,15 +126,14 @@ if (isset($_POST['gpuSubmit'])) {
 
                         <div class="addProDiv">
                             <label for="Image">Image</label>
-                            <input type="file" name="txtImage" id="Image" class="ImageGPU" required>
+                            <input type="file" name="txtImage" id="Image" class="ImageCPU" required>
                         </div>
                     </div>
 
-                    <button type="submit" name="gpuSubmit" id="submit">Submit</button>
+                    <button type="submit" name="cpuSubmit" id="submit">Submit</button>
+
                 </form>
-
             </div>
-
         </div>
     </div>
 </body>

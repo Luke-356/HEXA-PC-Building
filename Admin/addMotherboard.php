@@ -4,10 +4,11 @@ include 'adminCheck.php';
 
 if (isset($_POST['gpuSubmit'])) {
     $name = $_POST['txtName'];
-    $memory = $_POST['txtMemory'];
-    $clock = $_POST['txtCoreC'];
-    $boost = $_POST['txtBoostC'];
-    $tdb = $_POST['txtTDB'];
+    $socket = $_POST['txtSocket'];
+    $form = $_POST['txtForm'];
+    $max = $_POST['txtMax'];
+    $slot = $_POST['txtSloat'];
+    $color = $_POST['txtColor'];
     $price = $_POST['txtPrice'];
 
     $target_dir = "ProductImages/";
@@ -49,8 +50,8 @@ if (isset($_POST['gpuSubmit'])) {
         if (move_uploaded_file($_FILES["txtImage"]["tmp_name"], $target_file)) {
             // if everything is ok, try to upload file
 
-            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Memory`, `CoreClock`, `BoostClock`, `TDP`, `Price`, `Image`) 
-            VALUES (NULL,'GPU','$name','$memory','$clock','$boost','$tdb','$price','$fileName')";
+            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Socket`, `FormFactor`, `MemoryMax`, `MemorySlots`, `Color`, `Price`, `Image`) 
+            VALUES (NULL,'Motherboard','$name','$socket','$form','$max','$slot','$color','$price','$fileName')";
             $run = mysqli_query($connect, $insert);
 
             if ($run) {
@@ -70,7 +71,7 @@ if (isset($_POST['gpuSubmit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./adminStyle.css?v=1.48">
+    <link rel="stylesheet" href="./adminStyle.css?v=1.47">
     <style>
         .product {
             background: #464646;
@@ -95,35 +96,50 @@ if (isset($_POST['gpuSubmit'])) {
         <div class="admin-content">
             <div class="add-product-wrap">
                 <div class="header-back-btn">
-                    <h2>Add GPU</h2>
+                    <h2>Add Motherboard</h2>
                     <a href="productRedirect.php">Back</a>
                 </div>
 
                 <form method="post" class="product-form" enctype="multipart/form-data">
                     <div class="gpu-input">
                         <div class="addProDiv">
-                            <label for="Name">GPU Name</label>
+                            <label for="Name">Motherboard Name</label>
                             <input type="text" name="txtName" id="Name" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="Memory">Memory</label>
-                            <input type="number" name="txtMemory" id="Memory" placeholder="GB" required>
+                            <label for="socket">CPU Socket</label>
+                            <select name="txtSocket" id="socket">
+                                <option value="AM4">AM4</option>
+                                <option value="LGA1700">LGA1700</option>
+                                <option value="LGA1200">LGA1200</option>
+                                <option value="sTRX4">sTRX4</option>
+                            </select>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="CoreC">Core Clock</label>
-                            <input type="number" name="txtCoreC" id="CoreC" placeholder="MHz" required>
+                            <label for="form">Form Factor</label>
+                            <select name="txtForm" id="form">
+                                <option value="ATX">ATX</option>
+                                <option value="Micro ATX">Micro ATX</option>
+                                <option value="Mini ITX">Mini ITX</option>
+                                <option value="ETAX">ETAX</option>
+                            </select>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="BoostC">Boost Clock</label>
-                            <input type="number" name="txtBoostC" id="BoostC" placeholder="MHz" required>
+                            <label for="Max">Memory Max</label>
+                            <input type="number" name="txtMax" id="Max" placeholder="GB" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="TDP">TDP</label>
-                            <input type="number" name="txtTDB" id="TDB" placeholder="Watt" required>
+                            <label for="Slot">Memory Slots</label>
+                            <input type="number" name="txtSloat" id="Slot" required>
+                        </div>
+
+                        <div class="addProDiv">
+                            <label for="Color">Color</label>
+                            <input type="text" name="txtColor" id="Color" required>
                         </div>
 
                         <div class="addProDiv">
@@ -133,7 +149,7 @@ if (isset($_POST['gpuSubmit'])) {
 
                         <div class="addProDiv">
                             <label for="Image">Image</label>
-                            <input type="file" name="txtImage" id="Image" class="ImageGPU" required>
+                            <input type="file" name="txtImage" id="Image" class="ImageCPU" required>
                         </div>
                     </div>
 

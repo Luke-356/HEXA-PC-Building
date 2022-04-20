@@ -4,12 +4,11 @@ include 'adminCheck.php';
 
 if (isset($_POST['gpuSubmit'])) {
     $name = $_POST['txtName'];
-    $memory = $_POST['txtMemory'];
-    $clock = $_POST['txtCoreC'];
-    $boost = $_POST['txtBoostC'];
-    $tdb = $_POST['txtTDB'];
+    $speed = $_POST['txtSpeed'];
+    $modules = $_POST['txtModules'];
+    $pricegb = $_POST['txtPriceGB'];
     $price = $_POST['txtPrice'];
-
+    $color = $_POST['txtColor'];
     $target_dir = "ProductImages/";
     $fileName = $_FILES["txtImage"]["name"];
     $target_file = $target_dir . basename($_FILES["txtImage"]["name"]);
@@ -49,8 +48,8 @@ if (isset($_POST['gpuSubmit'])) {
         if (move_uploaded_file($_FILES["txtImage"]["tmp_name"], $target_file)) {
             // if everything is ok, try to upload file
 
-            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Memory`, `CoreClock`, `BoostClock`, `TDP`, `Price`, `Image`) 
-            VALUES (NULL,'GPU','$name','$memory','$clock','$boost','$tdb','$price','$fileName')";
+            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Speed`, `Modules`, `Price(per)GB`, `Price`, `Color`, `Image`) 
+            VALUES (NULL,'Memory','$name','$speed','$modules','$pricegb','$price','$color','$fileName')";
             $run = mysqli_query($connect, $insert);
 
             if ($run) {
@@ -70,7 +69,7 @@ if (isset($_POST['gpuSubmit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./adminStyle.css?v=1.48">
+    <link rel="stylesheet" href="./adminStyle.css?v=1.47">
     <style>
         .product {
             background: #464646;
@@ -95,40 +94,40 @@ if (isset($_POST['gpuSubmit'])) {
         <div class="admin-content">
             <div class="add-product-wrap">
                 <div class="header-back-btn">
-                    <h2>Add GPU</h2>
+                    <h2>Add Memory</h2>
                     <a href="productRedirect.php">Back</a>
                 </div>
 
                 <form method="post" class="product-form" enctype="multipart/form-data">
                     <div class="gpu-input">
                         <div class="addProDiv">
-                            <label for="Name">GPU Name</label>
+                            <label for="Name">Memory Name</label>
                             <input type="text" name="txtName" id="Name" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="Memory">Memory</label>
-                            <input type="number" name="txtMemory" id="Memory" placeholder="GB" required>
+                            <label for="Speed">Speed</label>
+                            <input type="text" name="txtSpeed" id="Speed" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="CoreC">Core Clock</label>
-                            <input type="number" name="txtCoreC" id="CoreC" placeholder="MHz" required>
+                            <label for="Modules">Modules</label>
+                            <input type="text" name="txtModules" id="Modules" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="BoostC">Boost Clock</label>
-                            <input type="number" name="txtBoostC" id="BoostC" placeholder="MHz" required>
-                        </div>
-
-                        <div class="addProDiv">
-                            <label for="TDP">TDP</label>
-                            <input type="number" name="txtTDB" id="TDB" placeholder="Watt" required>
+                            <label for="PriceGB">Price/GB</label>
+                            <input type="number" name="txtPriceGB" id="PriceGB" placeholder="Dollar" step="0000.01" required>
                         </div>
 
                         <div class="addProDiv">
                             <label for="Price">Price</label>
                             <input type="number" name="txtPrice" id="Price" placeholder="Dollar" step="0000.01" required>
+                        </div>
+
+                        <div class="addProDiv">
+                            <label for="Color">Color</label>
+                            <input type="text" name="txtColor" id="Color" required>
                         </div>
 
                         <div class="addProDiv">

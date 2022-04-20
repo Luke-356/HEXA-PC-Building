@@ -3,31 +3,31 @@ session_start();
 $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
 
 if (isset($_POST['btn-add'])) {
-    if (isset($_SESSION["add_gpu"])) {
-        $product_array_id = array_column($_SESSION["add_gpu"], "gpu_id");
+    if (isset($_SESSION["add_motherboard"])) {
+        $product_array_id = array_column($_SESSION["add_motherboard"], "motherboard_id");
         if (!in_array($_GET["id"], $product_array_id)) {
-            unset($_SESSION["add_gpu"]);
+            unset($_SESSION["add_motherboard"]);
             $product_array = array(
-                'gpu_id'               =>     $_GET["id"],
-                'gpu_name'               =>     $_GET["name"],
-                'gpu_image'               =>     $_GET["image"],
-                'gpu_price'          =>     $_GET["price"]
+                'motherboard_id'               =>     $_GET["id"],
+                'motherboard_name'               =>     $_GET["name"],
+                'motherboard_image'               =>     $_GET["image"],
+                'motherboard_price'          =>     $_GET["price"]
             );
-            $_SESSION["add_gpu"][0] = $product_array;
+            $_SESSION["add_motherboard"][0] = $product_array;
             echo '<script>window.location.assign("builder.php");</script>';
         } else {
-            echo '<script>alert("This GPU is already added")</script>';
+            echo '<script>alert("This Motherboard is already added")</script>';
         }
     } else {
         $product_array = array(
-            'gpu_id'               =>     $_GET["id"],
-            'gpu_name'               =>     $_GET["name"],
-            'gpu_image'               =>     $_GET["image"],
-            'gpu_price'          =>     $_GET["price"]
+            'motherboard_id'               =>     $_GET["id"],
+            'motherboard_name'               =>     $_GET["name"],
+            'motherboard_image'               =>     $_GET["image"],
+            'motherboard_price'          =>     $_GET["price"]
         );
-        $_SESSION["add_gpu"][0] = $product_array;
-        $_SESSION["gpu_id"] = $_GET["id"];
-        $_SESSION["gpu_price"] = $_GET["price"];
+        $_SESSION["add_motherboard"][0] = $product_array;
+        $_SESSION["motherboard_id"] = $_GET["id"];
+        $_SESSION["mother_price"] = $_GET["price"];
         echo '<script>window.location.assign("builder.php");</script>';
     }
 }
@@ -39,7 +39,7 @@ if (isset($_POST['btn-add'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css?v=2.9">
+    <link rel="stylesheet" href="./styles/style.css?v=2.8">
     <title>Add GPU</title>
     <style>
         .view-product-wrap img {
@@ -55,20 +55,20 @@ if (isset($_POST['btn-add'])) {
         ?>
 
         <?php
-        $select = "SELECT * FROM product WHERE ProductType='GPU' ORDER BY ProductID Desc";
+        $select = "SELECT * FROM product WHERE ProductType='Motherboard' ORDER BY ProductID Desc";
         $run = mysqli_query($connect, $select);
         $count = mysqli_num_rows($run);
 
         echo "<div class='view-product-container'>";
         if ($count > 0) {
         ?>
-            <h2>Choose GPU</h2>
+            <h2>Choose Motherboard</h2>
 
             <?php
             echo '<div class="view-product-grid">';
             while ($data = mysqli_fetch_array($run)) {
             ?>
-                <form method='POST' action="addGPU.php?id=<?php echo $data['ProductID'] ?> & name=<?php echo $data['ProductName'] ?> & image=<?php echo $data['Image'] ?> & price=<?php echo $data['Price'] ?>">
+                <form method='POST' action="addMotherboard.php?id=<?php echo $data['ProductID'] ?> & name=<?php echo $data['ProductName'] ?> & image=<?php echo $data['Image'] ?> & price=<?php echo $data['Price'] ?>">
 
                     <div class='view-product-wrap'>
                         <img src='../Admin/ProductImages/<?php echo $data['Image'] ?>'>

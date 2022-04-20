@@ -2,14 +2,15 @@
 $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
 include 'adminCheck.php';
 
-if (isset($_POST['gpuSubmit'])) {
+if (isset($_POST['cpuSubmit'])) {
     $name = $_POST['txtName'];
-    $memory = $_POST['txtMemory'];
-    $clock = $_POST['txtCoreC'];
-    $boost = $_POST['txtBoostC'];
-    $tdb = $_POST['txtTDB'];
+    $capacity = $_POST['txtCap'];
+    $gb = $_POST['txtGB'];
+    $type = $_POST['txtType'];
+    $cache = $_POST['txtCache'];
+    $form = $_POST['txtForm'];
+    $inter = $_POST['txtInter'];
     $price = $_POST['txtPrice'];
-
     $target_dir = "ProductImages/";
     $fileName = $_FILES["txtImage"]["name"];
     $target_file = $target_dir . basename($_FILES["txtImage"]["name"]);
@@ -44,17 +45,16 @@ if (isset($_POST['gpuSubmit'])) {
     }
 
     if ($uploadOk == 0) {
-        echo "Sorry, your image was not uploaded. Please Try Again.";
+        echo " Sorry, your image was not uploaded. Please Try Again.";
     } else {
         if (move_uploaded_file($_FILES["txtImage"]["tmp_name"], $target_file)) {
             // if everything is ok, try to upload file
-
-            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Memory`, `CoreClock`, `BoostClock`, `TDP`, `Price`, `Image`) 
-            VALUES (NULL,'GPU','$name','$memory','$clock','$boost','$tdb','$price','$fileName')";
+            $insert = "INSERT INTO `product`(`ProductID`, `ProductType`, `ProductName`, `Capacity`, `Price(per)GB`, `Type`, `Cache`, `FormFactor`, `Interface`, `Price`, `Image`) 
+            VALUES (NULL,'Storage','$name','$capacity','$gb','$type','$cache','$form','$inter','$price','$fileName')";
             $run = mysqli_query($connect, $insert);
 
             if ($run) {
-                echo "<script>alert('Add Product Successful')</script>";
+                echo "<script>alert('Storage Added Successfully')</script>";
             }
         } else {
             echo "Sorry, there was an error uploading your file.";
@@ -83,7 +83,7 @@ if (isset($_POST['gpuSubmit'])) {
             text-align: center;
         }
     </style>
-    <title>Document</title>
+    <title>Admin</title>
 </head>
 
 <body>
@@ -95,35 +95,48 @@ if (isset($_POST['gpuSubmit'])) {
         <div class="admin-content">
             <div class="add-product-wrap">
                 <div class="header-back-btn">
-                    <h2>Add GPU</h2>
+                    <h2>Add Storage</h2>
                     <a href="productRedirect.php">Back</a>
                 </div>
 
-                <form method="post" class="product-form" enctype="multipart/form-data">
-                    <div class="gpu-input">
+                <form method="POST" class="product-form" enctype="multipart/form-data">
+                    <div class="cpu-input">
                         <div class="addProDiv">
-                            <label for="Name">GPU Name</label>
+                            <label for="Name">Storage Name</label>
                             <input type="text" name="txtName" id="Name" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="Memory">Memory</label>
-                            <input type="number" name="txtMemory" id="Memory" placeholder="GB" required>
+                            <label for="Cap">Capacity</label>
+                            <input type="text" name="txtCap" id="Cap" placeholder="1TB" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="CoreC">Core Clock</label>
-                            <input type="number" name="txtCoreC" id="CoreC" placeholder="MHz" required>
+                            <label for="GB">Price/GB</label>
+                            <input type="number" name="txtGB" id="GB" placeholder="Dollar" step="0000.001" required>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="BoostC">Boost Clock</label>
-                            <input type="number" name="txtBoostC" id="BoostC" placeholder="MHz" required>
+                            <label for="Type">Type</label>
+                            <select name="txtType" id="Type">
+                                <option value="HDD">HDD</option>
+                                <option value="SSD">SSD</option>
+                            </select>
                         </div>
 
                         <div class="addProDiv">
-                            <label for="TDP">TDP</label>
-                            <input type="number" name="txtTDB" id="TDB" placeholder="Watt" required>
+                            <label for="Cache">Cache</label>
+                            <input type="number" name="txtCache" id="Cache" placeholder="MB" required>
+                        </div>
+
+                        <div class="addProDiv">
+                            <label for="Form">Form Factor</label>
+                            <input type="text" name="txtForm" id="Form" required>
+                        </div>
+
+                        <div class="addProDiv">
+                            <label for="Inter">Interface</label>
+                            <input type="text" name="txtInter" id="Inter" required>
                         </div>
 
                         <div class="addProDiv">
@@ -133,15 +146,14 @@ if (isset($_POST['gpuSubmit'])) {
 
                         <div class="addProDiv">
                             <label for="Image">Image</label>
-                            <input type="file" name="txtImage" id="Image" class="ImageGPU" required>
+                            <input type="file" name="txtImage" id="Image" class="ImageCPU" required>
                         </div>
                     </div>
 
-                    <button type="submit" name="gpuSubmit" id="submit">Submit</button>
+                    <button type="submit" name="cpuSubmit" id="submit">Submit</button>
+
                 </form>
-
             </div>
-
         </div>
     </div>
 </body>
