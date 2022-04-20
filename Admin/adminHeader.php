@@ -22,44 +22,52 @@ if (isset($_SESSION['AdminID'])) {
 <body>
     <div class="side-nav">
         <div class="nav-links">
-            <li class="user"><a href="manageUsers.php">Users</a></li>
-            <li class="product"><a href="products.php">Products</a></li>
-            <li class="question"><a href="">Questions</a></li>
-            <li class="order"><a href="">Orders</a></li>
-            <li class="rating"><a href="">Ratings</a></li>
+            <li class="user"><a href="index.php">Users</a></li>
+            <li class="product"><a href="productRedirect.php">Products</a></li>
+            <li class="rating"><a href="ratings.php">Ratings</a></li>
+            <li class="order"><a href="orders.php">Orders</a></li>
+            <li class="aregister"><a href="adminRegister.php">Register</a></li>
         </div>
 
         <div class="drop-down">
-            <div id="dropdown-content">
-                <a href="#home">Profile</a>
-                <a href="#about">Register</a>
-                <a href="#contact">Logout</a>
-            </div>
-
-            <div class="admin-btn" onclick="toogle()">
+            <div class="admin-btn">
                 <div>
                     <img src="../Images/user-alt.svg" alt="" srcset="">
                     <span><?php echo $AdminName ?></span>
                 </div>
-                <img src="../Images/plus.svg" alt="" srcset="">
             </div>
         </div>
-
     </div>
 
     <script>
-        function toogle() {
-            document.getElementById("dropdown-content").classList.toggle("show");
-        }
-
         const userLink = document.getElementsByClassName("user");
         userLink[0].addEventListener("click", () => {
-            window.location.href = "manageUsers.php";
+            window.location.href = "index.php";
         });
 
         const productLink = document.getElementsByClassName("product");
         productLink[0].addEventListener("click", () => {
-            window.location.href = "products.php";
+            window.location.href = "productRedirect.php";
+        });
+
+        const ratingLink = document.getElementsByClassName("rating");
+        ratingLink[0].addEventListener("click", () => {
+            window.location.href = "ratings.php";
+        });
+
+        const orderLink = document.getElementsByClassName("order");
+        orderLink[0].addEventListener("click", () => {
+            window.location.href = "orders.php";
+        });
+
+        const registerLink = document.getElementsByClassName("aregister");
+        registerLink[0].addEventListener("click", () => {
+            window.location.href = "adminRegister.php";
+        });
+
+        const profileLink = document.getElementsByClassName("admin-btn");
+        profileLink[0].addEventListener("click", () => {
+            window.location.href = "profile.php";
         });
     </script>
 </body>

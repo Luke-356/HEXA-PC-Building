@@ -34,7 +34,7 @@ if (isset($_POST['btnRegister'])) {
 
                 echo "<script>
                 alert('Register Successful');
-                window.location.assign('manageUsers.php');
+                window.location.assign('index.php');
                 </script>";
             }
         }
@@ -49,41 +49,161 @@ if (isset($_POST['btnRegister'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Pages/styles/style.css?v=1.45">
+    <link rel="stylesheet" href="./adminStyle.css?v=1.48">
     <title>Admin Register</title>
+    <style>
+        .aregister {
+            background: #464646;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .aregister a {
+            color: white;
+            text-align: center;
+        }
+
+        .register-form,
+        .login-form {
+            width: 100%;
+            margin: 4rem auto 0 auto;
+        }
+
+        .register-form h2,
+        .login-form h2 {
+            text-align: center;
+            font-size: 34px;
+            color: #464646;
+        }
+
+        .register-form button,
+        .register-form .edit-profile button,
+        .login-form button,
+        .login-form .edit-profile button {
+            border: none;
+            cursor: pointer;
+            padding: 1.2rem 2rem 1.2rem 2rem;
+            background-color: #464646;
+            font-size: 18px;
+            color: white;
+            border-radius: 14px;
+            width: 100%;
+        }
+
+        .register-form button:hover,
+        .register-form .edit-profile button:hover,
+        .login-form button:hover,
+        .login-form .edit-profile button:hover {
+            background-color: #3b3b3b;
+        }
+
+        .login-wrap {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .inputs {
+            margin-bottom: 1.6rem;
+            width: 100%;
+        }
+
+        .inputs input {
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 0.5rem;
+            border: none;
+            background-color: #e4e4e4;
+            padding: 1rem 0.5rem 1rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .inputs label {
+            font-size: 18px;
+        }
+
+        .inputs p {
+            font-size: 0.9rem;
+        }
+
+        .remember-forget {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            margin-bottom: 1.4rem;
+        }
+
+        .remember-forget a {
+            color: #0080ff;
+            font-weight: 500;
+        }
+
+        .remember-forget input[type="checkbox"],
+        .remember-forget .remember label {
+            cursor: pointer;
+        }
+
+        .not-register {
+            margin-top: 1.4rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .not-register a {
+            color: #0080ff;
+            font-weight: 500;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <form method="POST" class="register-form">
-            <h2 style="margin-bottom: 3rem;">Admin Register</h2>
-            <div class="inputs">
-                <label for="txtName">Admin Name</label> <br>
-                <input type="text" id="txtName" name="txtName" required>
-            </div>
 
-            <div class="inputs">
-                <label for="txtMail">Email</label> <br>
-                <input type="email" id="txtMail" name="txtMail" required>
-            </div>
+    <div class="admin-wrap">
+        <?php
+        include 'adminHeader.php'
+        ?>
 
-            <div class="inputs">
-                <label for="txtTel">Phone Number</label> <br>
-                <input type="tel" id="txtTel" name="txtTel" required>
-            </div>
+        <div class="admin-content">
+            <div class="add-product-wrap">
+                <form method="POST" class="register-form">
+                    <h2 style="margin-bottom: 3rem;">Admin Register</h2>
+                    <div class="inputs">
+                        <label for="txtName">Admin Name</label> <br>
+                        <input type="text" id="txtName" name="txtName" required>
+                    </div>
 
-            <div class="inputs">
-                <label for="txtPass">Password</label> <br>
-                <input type="password" name="txtPass" id="txtPass" required>
-            </div>
+                    <div class="inputs">
+                        <label for="txtMail">Email</label> <br>
+                        <input type="email" id="txtMail" name="txtMail" required>
+                    </div>
 
-            <div class="inputs">
-                <label for="txtCon">Confirm Password</label> <br>
-                <input type="password" name="txtPass" oninput="check(this)" required>
-            </div>
+                    <div class="inputs">
+                        <label for="txtTel">Phone Number</label> <br>
+                        <input type="tel" id="txtTel" name="txtTel" required>
+                    </div>
 
-            <button name="btnRegister" type="submit">Register</button>
-        </form>
+                    <div class="inputs">
+                        <label for="txtPass">Password</label> <br>
+                        <input type="password" name="txtPass" id="txtPass" required>
+                    </div>
+
+                    <div class="inputs">
+                        <label for="txtCon">Confirm Password</label> <br>
+                        <input type="password" name="txtPass" oninput="check(this)" required>
+                    </div>
+
+                    <button name="btnRegister" type="submit">Register</button>
+                </form>
+
+            </div>
+        </div>
     </div>
 
     <script src="./js/redirect.js"></script>

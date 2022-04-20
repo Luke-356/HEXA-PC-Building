@@ -49,8 +49,13 @@ if (isset($_POST['btnRegister'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/style.css?v=1.4">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>User Register</title>
+    <style>
+        .container {
+            margin-bottom: 6rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,44 +63,48 @@ if (isset($_POST['btnRegister'])) {
         <?php
         include 'header.php'
         ?>
+        <div class="login-wrap">
+            <form method="POST" class="register-form">
+                <h2>Sign Up</h2>
+                <div class="inputs">
+                    <label for="txtName">User Name</label> <br>
+                    <input type="text" id="txtName" name="txtName" required>
+                </div>
 
-        <form method="POST" class="register-form">
-            <h2>Sign Up</h2>
-            <div class="inputs">
-                <label for="txtName">User Name</label> <br>
-                <input type="text" id="txtName" name="txtName" required>
-            </div>
+                <div class="inputs">
+                    <label for="txtMail">Email</label> <br>
+                    <input type="email" id="txtMail" name="txtMail" required>
+                </div>
 
-            <div class="inputs">
-                <label for="txtMail">Email</label> <br>
-                <input type="email" id="txtMail" name="txtMail" required>
-            </div>
+                <div class="inputs">
+                    <label for="txtTel">Phone Number</label> <br>
+                    <input type="tel" id="txtTel" name="txtTel" required>
+                </div>
 
-            <div class="inputs">
-                <label for="txtTel">Phone Number</label> <br>
-                <input type="tel" id="txtTel" name="txtTel" required>
-            </div>
+                <div class="inputs">
+                    <label for="txtPass">Password</label> <br>
+                    <input type="password" name="txtPass" id="txtPass" required>
+                </div>
 
-            <div class="inputs">
-                <label for="txtPass">Password</label> <br>
-                <input type="password" name="txtPass" id="txtPass" required>
-            </div>
+                <div class="inputs">
+                    <label for="txtCon">Confirm Password</label> <br>
+                    <input type="password" name="txtPass" oninput="check(this)" required>
+                </div>
 
-            <div class="inputs">
-                <label for="txtCon">Confirm Password</label> <br>
-                <input type="password" name="txtPass" oninput="check(this)" required>
-            </div>
+                <button name="btnRegister" type="submit">Register</button>
 
-            <button name="btnRegister" type="submit">Register</button>
-
-            <div class="not-register">
-                <label for="">Already have account?</label>
-                <a href="login.php">Login</a>
-            </div>
-        </form>
+                <div class="not-register">
+                    <label for="">Already have account?</label>
+                    <a href="login.php">Login</a>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <script src="./js/redirect.js"></script>
+    <?php
+    include("footer.php");
+    ?>
+
     <script language='javascript' type='text/javascript'>
         check = (input) => {
             if (input.value != document.getElementById('txtPass').value) {

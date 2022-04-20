@@ -9,7 +9,7 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.css?v=1.45" />
+    <link rel="stylesheet" href="./styles/style.css" />
     <title>HEXA Home</title>
 </head>
 
@@ -46,14 +46,14 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
             <div class="hero-foot">
                 <p>Partnered with Top Tiers</p>
                 <div class="top-tiers">
-                    <img src="../Images/Vector 2.svg" />
+                    <img src="../Images/Vector 2.svg" class="arrow-img" />
                     <div class="compaines">
                         <img src="../Images/google-icon.svg" alt="" srcset="" />
                         <img src="../Images/intel.svg" alt="" srcset="" />
                         <img src="../Images/nvidia-icon.svg" alt="" srcset="" />
                         <img src="../Images/amd-icon.svg" alt="" srcset="" />
                     </div>
-                    <img src="../Images/Vector 3.svg" />
+                    <img src="../Images/Vector 3.svg" class="arrow-img" />
                 </div>
             </div>
         </div>
@@ -161,6 +161,10 @@ $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
             </div>
         </div> -->
     </div>
+
+    <?php
+    include("footer.php");
+    ?>
 
     <script src="./js/home.js"></script>
 </body>

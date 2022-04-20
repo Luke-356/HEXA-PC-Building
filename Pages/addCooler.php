@@ -3,31 +3,31 @@ session_start();
 $connect = mysqli_connect('localhost', 'root', '', 'hexa_pc_building');
 
 if (isset($_POST['btn-add'])) {
-    if (isset($_SESSION["add_cpu"])) {
-        $product_array_id = array_column($_SESSION["add_cpu"], "cpu_id");
+    if (isset($_SESSION["add_cooler"])) {
+        $product_array_id = array_column($_SESSION["add_cooler"], "cooler_id");
         if (!in_array($_GET["id"], $product_array_id)) {
-            unset($_SESSION["add_cpu"]);
+            unset($_SESSION["add_cooler"]);
             $product_array = array(
-                'cpu_id'               =>     $_GET["id"],
-                'cpu_name'               =>     $_GET["name"],
-                'cpu_image'               =>     $_GET["image"],
-                'cpu_price'          =>     $_GET["price"]
+                'cooler_id'               =>     $_GET["id"],
+                'cooler_name'               =>     $_GET["name"],
+                'cooler_image'               =>     $_GET["image"],
+                'cooler_price'          =>     $_GET["price"]
             );
-            $_SESSION["add_cpu"][0] = $product_array;
+            $_SESSION["add_cooler"][0] = $product_array;
             echo '<script>window.location.assign("builder.php");</script>';
         } else {
-            echo '<script>alert("This CPU is already added")</script>';
+            echo '<script>alert("This Cooler is already added")</script>';
         }
     } else {
         $product_array = array(
-            'cpu_id'               =>     $_GET["id"],
-            'cpu_name'               =>     $_GET["name"],
-            'cpu_image'               =>     $_GET["image"],
-            'cpu_price'          =>     $_GET["price"]
+            'cooler_id'               =>     $_GET["id"],
+            'cooler_name'               =>     $_GET["name"],
+            'cooler_image'               =>     $_GET["image"],
+            'cooler_price'          =>     $_GET["price"]
         );
-        $_SESSION["add_cpu"][0] = $product_array;
-        $_SESSION["cpu_id"] = $_GET["id"];
-        $_SESSION["cpu_price"] = $_GET["price"];
+        $_SESSION["add_cooler"][0] = $product_array;
+        $_SESSION["cooler_id"] = $_GET["id"];
+        $_SESSION["cooler_price"] = $_GET["price"];
         echo '<script>window.location.assign("builder.php");</script>';
     }
 }
@@ -56,19 +56,19 @@ if (isset($_POST['btn-add'])) {
 
         <div class='view-product-container'>
             <?php
-            $select = "SELECT * FROM product WHERE ProductType='CPU' ORDER BY ProductID Desc";
+            $select = "SELECT * FROM product WHERE ProductType='CPU Cooler' ORDER BY ProductID Desc";
             $run = mysqli_query($connect, $select);
             $count = mysqli_num_rows($run);
 
             if ($count > 0) {
             ?>
-                <h2>Choose CPU</h2>
+                <h2>Choose CPU Cooler</h2>
 
                 <?php
                 echo '<div class="view-product-grid">';
                 while ($data = mysqli_fetch_array($run)) {
                 ?>
-                    <form method='POST' action="addCPU.php?id=<?php echo $data['ProductID'] ?> & name=<?php echo $data['ProductName'] ?> & image=<?php echo $data['Image'] ?> & price=<?php echo $data['Price'] ?>">
+                    <form method='POST' action="addCooler.php?id=<?php echo $data['ProductID'] ?> & name=<?php echo $data['ProductName'] ?> & image=<?php echo $data['Image'] ?> & price=<?php echo $data['Price'] ?>">
 
                         <div class='view-product-wrap'>
                             <img src='../Admin/ProductImages/<?php echo $data['Image'] ?>'>

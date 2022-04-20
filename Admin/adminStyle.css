@@ -60,9 +60,9 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -80,6 +80,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   gap: 1rem;
 }
 
@@ -105,10 +108,11 @@ body {
 
 .admin-content {
   width: 100%;
+  overflow-x: auto;
 }
 
 .admin-content table {
-  width: 99%;
+  width: 100%;
   margin: 1rem auto 0 auto;
   text-align: center;
   padding: 1rem;
@@ -148,4 +152,41 @@ body {
 
 .add-product-header {
   text-align: center;
+}
+
+.product-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  text-align: center;
+}
+
+.product-grid div {
+  background-color: #dfdfdf;
+  padding: 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.product-grid div:hover {
+  background-color: #bdbdbd;
+}
+
+.add-product-wrap {
+  max-width: 800px;
+  margin: 2rem auto 0 auto;
+}
+
+.header-back-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 2rem;
 }
